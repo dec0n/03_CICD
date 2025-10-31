@@ -16,6 +16,7 @@
   - SBOM (CycloneDX)
 
 ### Артефакты
+
 - `results.sarif` (Gitleaks)
 - `semgrep.sarif`
 - `trivy-fs.sarif`
