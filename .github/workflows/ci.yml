@@ -55,10 +55,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run Gitleaks
-        uses: gitleaks/gitleaks-action@v2
         with:
-          leaks_args: --redact --report-format sarif --report-path results.sarif
+          fetch-depth: 0
+      - name: Install gitleaks
+        run: |
+          GITLEAKS_VERSION=8.24.3
+          curl -sSL https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz -o gitleaks.tar.gz
+          tar -xzf gitleaks.tar.gz gitleaks
+          sudo mv gitleaks /usr/local/bin/gitleaks
+      # Сканируем рабочую директорию без истории, чтобы не трогать API PR
+      - name: Run gitleaks
+        run: gitleaks detect --redact --no-git --report-format sarif --report-path results.sarif
       - uses: actions/upload-artifact@v4
         with:
           name: gitleaks-sarif
