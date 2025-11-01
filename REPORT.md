@@ -35,3 +35,4 @@
 ## Улучшения
 - Включить Code Scanning, чтобы SARIF отображался в Security → Code scanning alerts.
 - Добавить уведомления (Slack/Telegram) о статусе CI.
+✅ Обновление через UI Sat Nov  1 23:23:35 +06 2025
